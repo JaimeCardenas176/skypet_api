@@ -1,13 +1,17 @@
 var mongoose = require('mongoose');
-Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 
 const userShecma = new Schema({
-    name: {type: String},
-    surname: {type: String},
-    email: {type: String, unique: true}
+    name: {type: String, required: true},
+    surname: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
+    address: {type: String, unique: true},
+    phone: {type: String, unique: true},
+    is_admin: {type: Boolean, required: true}
 
 });
 
@@ -39,4 +43,4 @@ userShecma.pre('save', function (next) {
     })
 });
 
-module.exports = mongoose.model('CompanyUser', userShecma);
+module.exports = mongoose.model('User', userShecma);

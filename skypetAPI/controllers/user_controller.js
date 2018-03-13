@@ -42,7 +42,7 @@ module.exports.login = (req, res) => {
                 });
 
             if(!user) return res
-                .status(401),
+                .status(401)
                 .jsonp({
                     error: 404,
                     mensaje: 'No existe el usuario '

@@ -9,7 +9,7 @@ const customerSchema = new Schema({
     surname: {type: String},
     phone: {type: String},
     email:{type: String},
-    direccion: {type:String}
+    direccion: {type:String},
     macotas: [{type: schema.ObjectId , reference:'Mascota'}]
 
 });

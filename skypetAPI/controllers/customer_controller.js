@@ -15,7 +15,7 @@ module.exports.add_customer = (req, res) => {
     customer.save((err, result) => {
         if(err)
             return res
-                .status(500),
+                .status(500)
                 .jsonp({
                     error: 500,
                     mensaje: `${err.message}`
@@ -23,7 +23,7 @@ module.exports.add_customer = (req, res) => {
         return res
             .status(201)
             .jsonp({
-                nombre: result.nombre
+                nombre: result.nombre,
                 apellidos: result.apellidos,
                 email: result.email,
                 direccion: result.direccion,

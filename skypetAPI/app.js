@@ -19,9 +19,14 @@ app.use(methodOverride);
 
 app.use(router);
 app.use('/api/v1/users', users);
-
+/**
+ * se puede comentar nodeJS con javadoc???
+ */
 app.listen(3000, function () {
     console.log("Node server running on http://localhost:3000");
 });
-
+/**
+ *
+ * @type {*|Function}
+ */
 module.exports = app;

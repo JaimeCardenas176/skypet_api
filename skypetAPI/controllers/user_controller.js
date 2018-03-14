@@ -98,7 +98,7 @@ module.exports.login = (req, res) => {
 
 module.exports.edit_user = (req, res)  => {
     User
-        .update(/*{email: req.body.email},*/{
+        .updateOne({email: req.body.email},{
             name: req.body.name,
             surname: req.body.surname,
             email: req.body.email,password: req.body.password,
@@ -169,10 +169,37 @@ module.exports.delete_user = (req, res) => {
                         address: user.address,
                         phone: user.phone,
                         is_admin: user.is_admin,
-                        message: 'correctly edited'
+                        message: 'user deleted'
                     });
             }
         });
 }
 
-module.exports.list_pet_user
+module.exports.list_all_user = (req, res) => {
+    User
+        .find()
+        .exec((err, users) => {
+
+            if (err)
+                return res
+                    .status(500)
+                    .jsonp({
+                        error: 500,
+                        message: `${err.message}`
+                    });
+
+            if (users && users.length) {
+               return res
+                    .status(200)
+                    .jsonp(users);
+            } else {
+                return res
+                    .status(404)
+                    .jsonp({
+                        error: 404,
+                        message: `resource not found¡0`
+                    });
+            }
+
+        });
+}

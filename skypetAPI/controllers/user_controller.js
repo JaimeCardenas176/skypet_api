@@ -197,7 +197,7 @@ module.exports.list_all_user = (req, res) => {
                     .status(404)
                     .jsonp({
                         error: 404,
-                        message: `resource not found¡0`
+                        message: `resource not found`
                     });
             }
 

@@ -38,7 +38,7 @@ module.exports.register = (req, res) => {
                 token: service.createToken(user)
             });
     });
-}
+};
 
 //POST Login
 module.exports.login = (req, res) => {
@@ -68,7 +68,7 @@ module.exports.login = (req, res) => {
                         error: 401,
                         message: 'autenticathion failed'
                     });
-                if (result == false){
+                if (result === false){
                     return res
                         .status(401)
                         .jsonp({
@@ -94,7 +94,7 @@ module.exports.login = (req, res) => {
             });
 
         });
-}
+};
 
 module.exports.edit_user = (req, res)  => {
     User
@@ -137,7 +137,7 @@ module.exports.edit_user = (req, res)  => {
                     });
             }
         });
-}
+};
 
 module.exports.delete_user = (req, res) => {
     User
@@ -173,7 +173,7 @@ module.exports.delete_user = (req, res) => {
                     });
             }
         });
-}
+};
 
 module.exports.list_all_user = (req, res) => {
     User
@@ -202,4 +202,8 @@ module.exports.list_all_user = (req, res) => {
             }
 
         });
-}
+};
+
+module.exports = (req, res) => {
+
+};

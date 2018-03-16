@@ -16,7 +16,7 @@ module.exports.register = (req, res) => {
         is_admin: req.body.is_admin
     });
 
-    user.save((err, result) => {
+    User.save((err, result) => {
         if (err)
             return res
                 .status(500)
@@ -307,7 +307,7 @@ module.exports.owner_and_pets = (req, res) => {
     }
     return res
         .status(200)
-        .jsonp({
+        .jsonp([{
             owner_id: owner._id,
             owner_name: owner.name,
             owner_surname: owner.surname,
@@ -315,7 +315,7 @@ module.exports.owner_and_pets = (req, res) => {
             owner_address: owner.address,
             owner_phone: owner.phone,
             pets: pets
-        })
+        }]);
 
 
 };

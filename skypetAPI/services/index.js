@@ -39,4 +39,4 @@ module.exports.decodeToken = (token) => {
 });
     return decoded;
 
-}
+};

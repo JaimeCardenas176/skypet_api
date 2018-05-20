@@ -1,7 +1,10 @@
 const service = require('../services');
 
 module.exports.isAuth = (req, res, next) => {
+    auth(req, res, next)
+}
 
+function auth(req, res, next){
     if (!req.headers.authorization) {
         return res
             .status(403)
@@ -24,5 +27,4 @@ module.exports.isAuth = (req, res, next) => {
                 mensaje: errorResponse.mensaje
             });
         });
-
 }

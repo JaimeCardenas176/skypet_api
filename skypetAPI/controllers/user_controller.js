@@ -16,6 +16,9 @@ const service = require('../services');
 const User = require('../models/user_model');
 const Pet = require('../models/pet_model');
 
+
+//PROBABLEMENTE HAY QUE REESCRIBIR TODOS LOS METODOS CON DOS NIVELES
+//DE SEGURIDAD EN FUNCIÓN DEL TIPO DE USUARIO QUE SEAN
 //POST Registro y adición de usuarios
 /**
  * función que realiza la petiición de registro de un usuario

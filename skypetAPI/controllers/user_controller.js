@@ -71,12 +71,12 @@ module.exports.register = (req, res) => {
 module.exports.login = (req, res) => {
     User
         .findOne({email: req.body.email})
-        .select('_id email password')
+        .select()
         .exec((err, user) => {
             if (err) return res
-                .status(500)
+                .status(401)
                 .jsonp({
-                    error: 500,
+                    error: 401,
                     message: `${err.message}`
                 });
 
@@ -133,7 +133,7 @@ module.exports.login = (req, res) => {
  */
 module.exports.edit_user = (req, res) => {
     User               //filter user's id
-        .updateOne({id:_id}, {
+        .updateOne({_id: req.user}, {
             //fields edited
             name: req.body.name,
             surname: req.body.surname,

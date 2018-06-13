@@ -1,7 +1,9 @@
 const service = require('../services');
+const mongo = require('mongoose');
+const user = require('../controllers/user_controller');
 
 module.exports.isAuth = (req, res, next) => {
-    auth(req, res, next)
+    auth(req, res, next);
 }
 
 function auth(req, res, next){

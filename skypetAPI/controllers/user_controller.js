@@ -37,7 +37,7 @@ module.exports.register = (req, res) => {
         is_admin: req.body.is_admin
     });
 
-    User.save((err, result) => {
+    user.save((err, result) => {
         if (err)
             return res
                 .status(500)

@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
 const crypto = require('crypto');
 
-const userShecma = new Schema({
+const userSchema = new Schema({
     name: {type: String, required: true},
     surname: {type: String, required: true},
     email: {type: String, required: true, unique: true},
@@ -15,7 +15,7 @@ const userShecma = new Schema({
 
 });
 
-userShecma.pre('save', function (next) {
+userSchema.pre('save', function (next) {
     let user = this;
     if(user.isModified('email')){
         const md5 = crypto
@@ -43,4 +43,4 @@ userShecma.pre('save', function (next) {
     })
 });
 
-module.exports = mongoose.model('User', userShecma);
+module.exports = mongoose.model('User', userSchema);

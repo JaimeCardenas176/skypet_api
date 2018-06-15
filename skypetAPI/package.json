@@ -16,7 +16,9 @@
     "method-override": "~2.3.10",
     "moment": "^2.22.2",
     "mongoose": "^5.1.5",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "imgur": "^0.2.1",
+    "express-fileupload": "^0.4.0"
   },
   "author": "jaime cárdenas",
   "license": "ISC",

@@ -1,7 +1,8 @@
 const service = require('../services');
 const User = require('../models/user_model');
-const Pet = require('models/pet_model');
-const User = require('models/user_model');
+const Pet = require('../models/pet_model');
+const imgur = require('imgur');
+
 
 //POST registro/adición de mascotas
 module.exports.add_pet = (req, res) => {
@@ -14,10 +15,10 @@ module.exports.add_pet = (req, res) => {
         last_date: req.body.last_date,
         url_photo: req.body.url_photo
     });
-    Pet.save((err, result) => {
+    pet.save((err, result) => {
        if(err)
            return res
-               .status(500),
+               .status(500)
                .jsonp({
                    error: 500,
                    message: `${err.message}`
@@ -52,8 +53,7 @@ module.exports.list_pet = ((req, res) => {
              if(pets && pets.length) {
                  return res
                      .status(200)
-                     .jsonp(pets
-                     );
+                     .jsonp(pets);
              }
     });
 });
@@ -84,7 +84,7 @@ module.exports.delete_pet = ((req, res) =>{
                        gender: pet.gender,
                         owner: pet.owner._id,
                         state: pet.state,
-                        last_location: pbget.last_location,
+                        last_location: pet.last_location,
                         last_date: pet.last_date,
                         url_photo: pet.url_photo,
 
@@ -93,8 +93,96 @@ module.exports.delete_pet = ((req, res) =>{
 
         });
 });
-//TODO hay que realizar la petición multiparte
-// mirar en futur estud.io la libreria se me ha vuelto a olvidar
-// algo de Okhttp para crear api rest que consuma un cliente android
-//Retrofit!!! es el nombre de la libreria!
-//TODO commitear los cambios, no hay nada en el staying AREA
+
+module.exports.edit_pet = ((req, res)=>{
+    Pet
+        .findOne({_id: req._id}, true)
+        .exec((err, pet) => {
+            if(err) return res
+                .status(401)
+                .jsonp({
+                    error: 401,
+                    message:'autenticathion failed'
+                });
+            if(!pet) {
+                return res
+                    .status(404)
+                    .jsonp({
+                        error: 404,
+                        message: 'pet does not exist'
+                    });
+            }else{
+                if(req.body.name) {
+                    pet.name = req.body.name;
+                }else if(req.body.state){
+                    pet.state = req.body.state;
+                }
+                return res
+                    .status(200)
+                    .jsonp({
+                        id: pet._id,
+                        name: pet.name,
+                        gender: pet.gender,
+                        owner: pet.owner._id,
+                        state: pet.state,
+                        last_location: pet.last_location,
+                        last_date: pet.last_date,
+                        url_photo: pet.url_photo,
+
+                    });
+            }
+
+        });
+});
+
+module.exports.pet_details = ((req, res) =>{
+    Pet
+        .findOne({_id: req._id}, true)
+        .exec((err, pet) => {
+            if(err) return res
+                .status(401)
+                .jsonp({
+                    error: 401,
+                    message:'autenticathion failed'
+                });
+            if(!pet) {
+                return res
+                    .status(404)
+                    .jsonp({
+                        error: 404,
+                        message: 'pet does not exist'
+                    });
+            }else{
+                return res
+                    .status(200)
+                    .jsonp({
+                        id: pet._id,
+                        name: pet.name,
+                        gender: pet.gender,
+                        owner: pet.owner._id,
+                        state: pet.state,
+                        last_location: pet.last_location,
+                        last_date: pet.last_date,
+                        url_photo: pet.url_photo,
+
+                    });
+            }
+
+        });
+});
+/*module.exports.uploadImg = (req, res) => {
+    if(req.files){
+        let fichero = req.files.photo;
+        let imgBase64 = fichero.data.toString('base64');
+
+        imgur.setClientId("mi_client_id");
+
+        imgur.uploadBase64(imgBase64)
+            .then(function (json) {
+                registro(req, res, json.data.link);
+            })
+            .catch(function (err) {
+                registro(req, res, null);
+            })
+    }
+};*/

@@ -103,7 +103,6 @@ module.exports.login = (req, res) => {
                             message: 'autenticathion error'
                         });
                 } else {
-                    //puede ser que haya que revisar esto
                     req.user = user;
                     res.status(200).jsonp({
                         id: user._id,
@@ -121,6 +120,40 @@ module.exports.login = (req, res) => {
             });
 
         });
+};
+/**
+ * función que realiza la petición de información un usuario
+ * @param req parámetro request con la nformación del usuario
+ * @param res JSON respuesta con todos los datos del usuario
+ */
+module.exports.details = (req, res) => {
+    User
+        .findOne({_id: req.user})
+        .select()
+        .exec((err, user) =>{
+            if (err) {
+                return res
+                    .status(500)
+                    .jsonp({error: 400, mensaje: `${err.message}`});
+            }
+            if (!user) {
+                return res
+                    .status(403)
+                    .jsonp({error: 403, mensaje: `${err.message}`});
+            }
+            return res.status(200).jsonp({
+                id: user._id,
+                name: user.name,
+                surname: user.surname,
+                email: user.email,
+                password: user.password,
+                address: user.address,
+                phone: user.phone,
+                is_admin: user.is_admin
+            });
+
+        });
+
 };
 //POST edit user
 /**
@@ -175,6 +208,7 @@ module.exports.edit_user = (req, res) => {
             }
         });
 };
+
 //DELETE delete user
 /**
  * función que permite borrar un usuario de la base de datos alojada en el servidor de mlab
@@ -183,7 +217,7 @@ module.exports.edit_user = (req, res) => {
  */
 module.exports.delete_user = (req, res) => {
     User
-        .remove({email: req.body.email}, true)
+        .remove({_id: req.user}, true)
         .exec((err, user) => {
             if (err) return res
                 .status(401)
@@ -262,7 +296,7 @@ module.exports.list_all_admin = (req, res) => {
 //this the needed query to print the owner's data in mobile app
 module.exports.find_owner = (req, res) => {
     User
-        .findOne({is_admin: false, email:req.body.email})
+        .findOne({is_admin: false, _id: req.user})
         .exec((err, owner) => {
             if (err)
                 return res
@@ -372,7 +406,6 @@ module.exports.owner_and_pets = (req, res) => {
     for (let i=0; owners.length; i++){
        owner = owners[i]._id;
        pets=one_owner_pets(owner._id);
-    }
     return res
         .status(200)
         .jsonp([{
@@ -384,6 +417,7 @@ module.exports.owner_and_pets = (req, res) => {
             owner_phone: owner.phone,
             pets: pets
         }]);
+    }
 
 
 };

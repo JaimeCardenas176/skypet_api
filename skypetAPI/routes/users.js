@@ -7,7 +7,7 @@ const auth = require('../middlewares/auth');
 
 router.post('/register', userController.register);
 router.post('/login', userController.login);
-//estas dos de aqui abajo no funcionan no se por que
+router.get('/details/:id', auth.isAuth, userController.details);
 router.put('/edit/:id',auth.isAuth, userController.edit_user);
 router.delete('/delete/:id', auth.isAuth, userController.delete_user);
 //pendientes de testear

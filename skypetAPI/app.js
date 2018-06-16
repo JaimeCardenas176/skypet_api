@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 //app.use(router);
 app.use('/api/v1/users', users);
-//app.use('/pets',pets);
+app.use('/pets',pets);
 /**
  * se puede comentar nodeJS con javadoc???
  */

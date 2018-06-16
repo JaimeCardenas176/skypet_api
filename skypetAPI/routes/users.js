@@ -10,7 +10,7 @@ router.post('/login', userController.login);
 router.get('/details/:id', auth.isAuth, userController.details);
 router.put('/edit/:id',auth.isAuth, userController.edit_user);
 router.delete('/delete/:id', auth.isAuth, userController.delete_user);
-//pendientes de testear
+
 router.get('/admins', auth.isAuth, userController.list_all_admin);
 router.get('/owner/:id', auth.isAuth, userController.find_owner);
 router.get('/owners', auth.isAuth, userController.list_all_owner);

@@ -3,7 +3,7 @@ var mongoose =  require('mongoose');
 
 const petSchema = new Schema({
     name: {type: String, required: true},
-    gender:{type: String, enum: ['Male','Female']},
+    gender:{type: String},
     owner: {type: Schema.ObjectId, required: true, ref:'User'},
     state: {type: Number, required: true},
     last_location:{type: String},

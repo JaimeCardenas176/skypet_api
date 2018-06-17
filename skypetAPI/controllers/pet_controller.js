@@ -38,7 +38,7 @@ module.exports.add_pet = (req, res) => {
     });
 
 };
-//GET listar mascotas con la referencia al id de su propietario
+//GET listar mascotas
 module.exports.list_pet = ((req, res) => {
     Pet
         .find()
@@ -168,6 +168,44 @@ module.exports.pet_details = ((req, res) =>{
                     });
             }
 
+        });
+});
+//listar mascotas perdidas
+module.exports.perdidas_pet = ((req, res) => {
+    Pet
+        .find({state: 1})
+        .exec( (err, pets) => {
+            if (err)
+                return res
+                    .status(401)
+                    .jsonp({
+                        error:401,
+                        message: 'no tienes autorizacion para accerder al recurso'
+                    });
+            if(pets && pets.length) {
+                return res
+                    .status(200)
+                    .jsonp(pets);
+            }
+        });
+});
+//mascotas encontradas por otro usuario
+module.exports.encontradas_pet = ((req, res) => {
+    Pet
+        .find({state: 2})
+        .exec( (err, pets) => {
+            if (err)
+                return res
+                    .status(401)
+                    .jsonp({
+                        error:401,
+                        message: 'no tienes autorizacion para accerder al recurso'
+                    });
+            if(pets && pets.length) {
+                return res
+                    .status(200)
+                    .jsonp(pets);
+            }
         });
 });
 /*module.exports.uploadImg = (req, res) => {

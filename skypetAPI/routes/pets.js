@@ -10,5 +10,7 @@ router.get('/list', petController.list_pet);
 router.delete('/delete/:id', petController.delete_pet);
 router.put('/edit/:id', petController.edit_pet);
 router.put('/pet_details/:id', petController.pet_details);
+routes.get('/perdidas_pet', petController.perdidas_pet);
+routes.get('/encontradas_pet', petController.encontradas_pet);
 
 module.exports = router;

@@ -13,7 +13,6 @@ let users = require('./routes/users');
 let pets = require('./routes/pets');
 
 mongoose.connect(config.MONGODB_URI);
-    //,{ useMongoClient: true });
 mongoose.Promise = global.Promise;
 
 var app = express();
@@ -25,10 +24,7 @@ app.use(expressfileupload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(methodOverride);
-// app.use(auth);
 
-//app.use(router);
 app.use('/api/v1/users', users);
 app.use('/pets',pets);
 /**

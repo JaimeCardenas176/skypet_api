@@ -421,14 +421,3 @@ module.exports.owner_and_pets = (req, res) => {
 
 
 };
-//GET en teoraía esto tendria que devolver todos los usuarios
-//propietarios con su respectiva lista de mascotas
-/**
- * pendiente de implemenatación, último CALL
- * @param req
- * @param res
- */
-//TODO pendiente de implementación ~ ni puta idea hulioo
-module.exports.all_owner_and_pets = (req,res) => {
-
-};
